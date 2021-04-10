@@ -2,7 +2,7 @@ from flask import Flask, Response
 from flask import request
 import os
 import redis
-import fakeredis
+#import fakeredis
 import json
 
 app = Flask(__name__)
