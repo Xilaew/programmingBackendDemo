@@ -7,8 +7,8 @@ import json
 
 app = Flask(__name__)
 
-#r = redis.from_url(os.environ.get("REDIS_URL"))
-r = fakeredis.FakeStrictRedis()
+r = redis.from_url(os.environ.get("REDIS_URL"))
+#r = fakeredis.FakeStrictRedis()
 
 def store(key, value):
     r.set(key,value)
