@@ -37,6 +37,7 @@ def homepage():
       <label>value</label><input type='text' name='value'></input>
       <input type='submit'></input>
     </form>
+    <img src="https://api.thecatapi.com/v1/images/search">
     </body>
     </html>
     """
