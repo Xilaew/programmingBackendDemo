@@ -1,7 +1,7 @@
 from flask import Flask, Response
 from flask import request, redirect, url_for
 import os
-#import redis
+import redis
 #import fakeredis
 import json
 
