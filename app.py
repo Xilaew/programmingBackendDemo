@@ -1,5 +1,5 @@
 from flask import Flask, Response
-from flask import request
+from flask import request, redirect, url_for
 import os
 import redis
 #import fakeredis
@@ -37,7 +37,7 @@ def homepage():
       <label>value</label><input type='text' name='value'></input>
       <input type='submit'></input>
     </form>
-    <img src="https://api.thecatapi.com/v1/images/search">
+    <img src="https://api.thecatapi.com/v1/images/search?format=src">
     </body>
     </html>
     """
@@ -64,6 +64,18 @@ def judge():
             result += "<tr><td>{key}</td><td>{value}</td></tr>".format(key=key.decode("utf-8"), value=value.decode("utf-8"))
     result = "<table>{result}</table>".format(result=result)
     return result
+
+
+app.route('/clear', methods = ['POST'])
+def post_clear():
+    r.flushdb()
+    return redirect(url_for(judge))
+
+
+app.route('/clear', methods = ['GET'])
+def get_clear():
+    return app.send_static_file()
+
 
 
 if __name__ == '__main__':
