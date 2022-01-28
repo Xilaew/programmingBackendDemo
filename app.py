@@ -1,11 +1,13 @@
 from flask import Flask, Response
 from flask import request
 import os
-import redis
+import fakeredis
+#import redis
 
 app = Flask(__name__)
 
-r = redis.from_url(os.environ.get("REDIS_URL"))
+#r = redis.from_url(os.environ.get("REDIS_URL"))
+r = fakeredis.FakeStrictRedis()
 
 @app.route('/')
 def homepage():
