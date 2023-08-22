@@ -8,9 +8,11 @@ app = Flask(__name__)
 if 'REDISCLOUD_URL' in os.environ:
     import redis    
     r = redis.from_url(os.environ['REDISCLOUD_URL'])
+    print("Found redis at: " + os.environ['REDISCLOUD_URL'])
 else:
     import fakeredis
     r = fakeredis.FakeStrictRedis()
+    print("using Fakeredis")
 
 def store(key, value):
     r.set(key, value)
@@ -26,22 +28,7 @@ def get(key):
 
 @app.route('/', methods=['GET'])
 def homepage():
-    return """
-    <html>
-    <head>
-    <title>sink ships</title>
-    </head>
-    <body style="background-color: white;">
-    <h1>An input form</h1>
-    <form action='/submit' method='post'>
-      <label>key</label><input type='text' name='key'></input>
-      <label>value</label><input type='text' name='value'></input>
-      <input type='submit'></input>
-    </form>
-    <img src="https://api.thecatapi.com/v1/images/search?format=src">
-    </body>
-    </html>
-    """
+    return app.send_static_file("index.html")
 
 
 @app.route('/submit', methods=['POST'])
@@ -100,6 +87,9 @@ def post_clear():
 def get_clear():
     return app.send_static_file("clear.html")
 
+@app.route("/hello")
+def hello():
+    return "hallo, " + request.args["name"] + "Schön dasss du da bist!"
 
 if __name__ == '__main__':
     app.run(debug=True, use_reloader=True)
