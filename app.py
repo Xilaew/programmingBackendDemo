@@ -30,7 +30,7 @@ def homepage():
     <head>
     <title>sink ships</title>
     </head>
-    <body style="background-color: red;">
+    <body style="background-color: white;">
     <h1>An input form</h1>
     <form action='/submit' method='post'>
       <label>key</label><input type='text' name='key'></input>
