@@ -1,15 +1,16 @@
 from flask import Flask, Response
 from flask import request, redirect, url_for
 import os
-#import redis
-import fakeredis
 import json
 
 app = Flask(__name__)
 
-#r = redis.from_url(os.environ['REDISCLOUD_URL'])
-r = fakeredis.FakeStrictRedis()
-
+if 'REDISCLOUD_URL' in os.environ:
+    import redis    
+    r = redis.from_url(os.environ['REDISCLOUD_URL'])
+else:
+    import fakeredis
+    r = fakeredis.FakeStrictRedis()
 
 def store(key, value):
     r.set(key, value)
