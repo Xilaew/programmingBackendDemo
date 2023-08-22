@@ -8,9 +8,11 @@ app = Flask(__name__)
 if 'REDISCLOUD_URL' in os.environ:
     import redis    
     r = redis.from_url(os.environ['REDISCLOUD_URL'])
+    print("Found redis at: " + os.environ['REDISCLOUD_URL'])
 else:
     import fakeredis
     r = fakeredis.FakeStrictRedis()
+    print("using Fakeredis")
 
 def store(key, value):
     r.set(key, value)
